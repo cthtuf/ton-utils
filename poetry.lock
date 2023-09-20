@@ -1440,7 +1440,7 @@ pynacl = ">=1.4.0"
 [[package]]
 name = "TonTools"
 version = "2.1.2"
-description = ""
+description = "Explore TON Blockchain with python"
 category = "main"
 optional = false
 python-versions = "*"
@@ -1459,8 +1459,8 @@ tonsdk = ">=1.0.13"
 [package.source]
 type = "git"
 url = "git@github.com:cthtuf/TonTools.git"
-reference = "big/fix-empty-jetton-description"
-resolved_reference = "8b46f3364ce47f5576344d25cb1fda583b585519"
+reference = "feature/fix-ton-center-send-boc-response"
+resolved_reference = "0be9630968d092e9abd8c25b7853ae3d20c900cb"
 
 [[package]]
 name = "tvm-valuetypes"
@@ -1620,4 +1620,4 @@ multidict = ">=4.0"
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10"
-content-hash = "09fb9dcd0f981fb1a04275a1f95dff723eb31d4a9bc2a9dd7d60ff2f2c9ff05f"
+content-hash = "a847e557a5297fd8b7d6fa7e1dbf95df2320b6445d4b2c4210aa1c1935beeb71"
