@@ -34,7 +34,7 @@ class WalletState(str, Enum):
 async def setup() -> t.Tuple[argparse.Namespace, list[str], list[str]]:
     parser = argparse.ArgumentParser(description="Send jettons from source wallet to destination wallets.")
     parser.add_argument(
-        "--api_key",
+        "--api-key",
         type=str,
         required=False,
         default=os.environ.get("TON_CENTER_API_KEY"),
