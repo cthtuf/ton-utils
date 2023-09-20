@@ -117,7 +117,7 @@ async def get_wallet(client: TonCenterClient, mnemonics: list[str], wallet_versi
 @retry(
     stop=stop_after_attempt(int(os.getenv("SEND_RETRY_ATTEMPTS", 5))),
     wait=wait_fixed(int(os.getenv("SEND_RETRY_WAIT", 5))),
-    retry=retry_if_exception_type(TonCenterClientError),
+    retry=retry_if_exception_type((TonCenterClientError, ValueError)),
     after=after_log(logger, logging.INFO),
 )
 async def send_jetton(
@@ -129,16 +129,31 @@ async def send_jetton(
     sleep_seconds: int,
 ) -> None:
     try:
-        api_response_code = await source_wallet.transfer_jetton(
+        api_response = await source_wallet.transfer_jetton(
             destination_address=destination_wallet,
             jetton_master_address=jetton.address,
             jettons_amount=amount,
             fee=fee,
         )
-        logger.info("Jetton sent to wallet: %s with code %s", destination_wallet, api_response_code)
-        sleep(sleep_seconds)
+        if api_response.status == 200:
+            logger.info(
+                "Jetton sent to wallet: %s with content %s",
+                destination_wallet,
+                await api_response.text(),
+            )
+            sleep(sleep_seconds)
+        else:
+            logger.error(
+                "Cannot send jetton for wallet: %s, status: %s, content: %s",
+                destination_wallet,
+                api_response.status,
+                await api_response.text(),
+            )
+            raise ValueError()
     except GetMethodError as gme:
         logger.error("Get method error for wallet: %s, error: %s", destination_wallet, str(gme))
+    except ValueError:
+        raise
     except BaseException as exc:
         logger.error("Cannot send jetton for wallet: %s, error: %s", destination_wallet, str(exc))
         raise
