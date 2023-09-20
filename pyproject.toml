@@ -8,7 +8,7 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.10"
-tontools = {git = "git@github.com:cthtuf/TonTools.git", rev = "feature/fix-ton-center-send-boc-response"}
+tontools = {git = "git@github.com:cthtuf/TonTools.git", rev = "master"}
 tenacity = "^8.2.3"
 
 

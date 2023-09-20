@@ -1459,8 +1459,8 @@ tonsdk = ">=1.0.13"
 [package.source]
 type = "git"
 url = "git@github.com:cthtuf/TonTools.git"
-reference = "feature/fix-ton-center-send-boc-response"
-resolved_reference = "0be9630968d092e9abd8c25b7853ae3d20c900cb"
+reference = "master"
+resolved_reference = "1fb5d00b1512c908a407f5d79dfae4e1f6bf8b08"
 
 [[package]]
 name = "tvm-valuetypes"
@@ -1620,4 +1620,4 @@ multidict = ">=4.0"
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10"
-content-hash = "a847e557a5297fd8b7d6fa7e1dbf95df2320b6445d4b2c4210aa1c1935beeb71"
+content-hash = "9ae2e4be514a628d688d22d5a4259156119430997cdbcb00ee774586aeb1667f"

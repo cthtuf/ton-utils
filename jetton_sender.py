@@ -117,7 +117,7 @@ async def get_wallet(client: TonCenterClient, mnemonics: list[str], wallet_versi
 @retry(
     stop=stop_after_attempt(int(os.getenv("SEND_RETRY_ATTEMPTS", 5))),
     wait=wait_fixed(int(os.getenv("SEND_RETRY_WAIT", 5))),
-    retry=retry_if_exception_type((TonCenterClientError, ValueError)),
+    retry=retry_if_exception_type((TonCenterClientError, asyncio.InvalidStateError)),
     after=after_log(logger, logging.INFO),
 )
 async def send_jetton(
@@ -149,10 +149,13 @@ async def send_jetton(
                 api_response.status,
                 await api_response.text(),
             )
-            raise ValueError()
+            raise asyncio.InvalidStateError()
     except GetMethodError as gme:
         logger.error("Get method error for wallet: %s, error: %s", destination_wallet, str(gme))
-    except ValueError:
+    except asyncio.TimeoutError as te:
+        logger.error("Timeout error, check the wallet: %s, error: %s", destination_wallet, str(te))
+    except asyncio.InvalidStateError:
+        # Some transaction Error
         raise
     except BaseException as exc:
         logger.error("Cannot send jetton for wallet: %s, error: %s", destination_wallet, str(exc))
