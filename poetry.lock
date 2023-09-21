@@ -1459,8 +1459,8 @@ tonsdk = ">=1.0.13"
 [package.source]
 type = "git"
 url = "git@github.com:cthtuf/TonTools.git"
-reference = "master"
-resolved_reference = "1fb5d00b1512c908a407f5d79dfae4e1f6bf8b08"
+reference = "feature/fix-decode-jetton-description"
+resolved_reference = "af70bbe05feb62811347c42ced37b578702589aa"
 
 [[package]]
 name = "tvm-valuetypes"
@@ -1620,4 +1620,4 @@ multidict = ">=4.0"
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10"
-content-hash = "9ae2e4be514a628d688d22d5a4259156119430997cdbcb00ee774586aeb1667f"
+content-hash = "f689edff6b1adb73e8067971ec1ca5a805729ee569c20614f1f3bb75a1364ad9"
